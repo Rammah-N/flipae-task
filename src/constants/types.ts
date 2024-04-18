@@ -1,18 +1,32 @@
 import { AccordionItemProps } from "@radix-ui/react-accordion";
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 export interface Employee {
 	id: number;
 	name: string;
-	supervisorId: number | null;
+	supervisor: {
+		id: number;
+		name: string;
+	} | null;
+	createdAt: string;
+	updatedAt: string;
+}
+
+interface NavItemWithOptionalChildren {
+	title: string;
+	items?: {
+		title: string;
+		href: string;
+	}[];
 }
 
 export interface DashboardNavProps {
-	items: string[];
+	items: NavItemWithOptionalChildren[];
 	setOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface DropdownNavProps extends AccordionItemProps {
-	item: string[];
+	item: NavItemWithOptionalChildren;
 	path: string;
+	icon: React.ReactNode;
 }

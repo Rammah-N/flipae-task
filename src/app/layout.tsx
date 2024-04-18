@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Sidebar from "@/components/layout/sidebar";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +18,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={cn(inter.className, "p-5")}>
+			<body className={cn(inter.className)}>
 				<Sidebar />
-				<main>{children}</main>
+				<ScrollArea className="h-full flex-1 ">
+					<main className="flex-1 py-5">{children}</main>
+				</ScrollArea>
 			</body>
 		</html>
 	);
