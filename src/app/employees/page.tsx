@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -10,11 +11,40 @@ import {
 import EmployeeTable from "@/components/employees-table/table";
 import { Button } from "@/components/ui/button";
 import { UserPlus } from "lucide-react";
+import { employees } from "@/constants/data";
 import Search from "@/components/search";
+import { Employee } from "@/constants/types";
+import { EmployeeContext } from "@/context/employees";
 
 const Page = () => {
+	const savedEmployees = localStorage.getItem("employees")
+		? JSON.parse(localStorage.getItem("employees") as string)
+		: employees;
+	const [data, setData] = useState<Employee[]>(savedEmployees);
+
+	const handleSearch = (value: string) => {
+		if (value === "") {
+			setData(savedEmployees);
+			return;
+		}
+
+		const filteredData = employees.filter((employee) =>
+			employee.name.toLowerCase().includes(value.toLowerCase())
+		);
+		setData(filteredData);
+	};
+	const contextValue = {
+		employees: data,
+		setEmployees: setData,
+		deleteEmployee: (id: number) => {
+			const newEmployees = data.filter((employee) => employee.id !== id);
+			setData(newEmployees);
+			localStorage.setItem("employees", JSON.stringify(newEmployees));
+		},
+		searchEmployee: handleSearch,
+	};
 	return (
-		<>
+		<EmployeeContext.Provider value={contextValue}>
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
@@ -37,8 +67,19 @@ const Page = () => {
 					Add Employee
 				</Button>
 			</div>
+			<div className="flex justify-between items-center">
+				<Search />
+				<Button
+					variant={null}
+					onClick={() => {
+						setData(employees);
+						localStorage.setItem("employees", JSON.stringify(employees));
+					}}>
+					Reset Data
+				</Button>
+			</div>
 			<EmployeeTable />
-		</>
+		</EmployeeContext.Provider>
 	);
 };
 

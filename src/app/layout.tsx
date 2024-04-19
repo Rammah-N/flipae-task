@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -23,6 +24,7 @@ export default function RootLayout({
 				<ScrollArea className="h-full flex-1 ">
 					<main className="flex-1 py-5">{children}</main>
 				</ScrollArea>
+				<Toaster />
 			</body>
 		</html>
 	);

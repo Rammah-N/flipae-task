@@ -15,7 +15,7 @@ interface ModalProps {
 	children?: React.ReactNode;
 }
 
-const AlertModal: React.FC<ModalProps> = ({
+const Modal: React.FC<ModalProps> = ({
 	title,
 	description,
 	isOpen,
@@ -41,4 +41,4 @@ const AlertModal: React.FC<ModalProps> = ({
 	);
 };
 
-export default AlertModal;
+export default Modal;

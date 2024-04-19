@@ -35,7 +35,6 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
-	searchKey: string;
 	pageNo?: number;
 	total?: number;
 	pageSizeOptions?: number[];
@@ -127,8 +126,8 @@ export function DataTable<TData, TValue>({
 
 	return (
 		<>
-			<ScrollArea className="rounded-md border h-[calc(80vh-100px)]">
-				<Table className="relative">
+			<ScrollArea className="rounded-md border h-[calc(80vh-100px)] bg-white">
+				<Table className="relative bg-white">
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
@@ -147,7 +146,7 @@ export function DataTable<TData, TValue>({
 							</TableRow>
 						))}
 					</TableHeader>
-					<TableBody>
+					<TableBody className="bg-white">
 						{loading ? (
 							<TableRow>
 								<TableCell

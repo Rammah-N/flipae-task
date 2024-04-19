@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SearchIcon } from "lucide-react";
+import { EmployeeContext } from "@/context/employees";
 
 export type Filter = {
 	name: string;
@@ -14,14 +15,11 @@ export type Filter = {
 	}[];
 };
 
-const Search = ({
-	handleSearch,
-}: {
-	handleSearch: (value: string) => void;
-}) => {
+const Search = () => {
 	const pathname = usePathname();
 	const { replace } = useRouter();
 	const searchParams = useSearchParams();
+	const handleSearch = useContext(EmployeeContext).searchEmployee;
 
 	const clear = () => {
 		const params = new URLSearchParams(searchParams);
