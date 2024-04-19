@@ -27,7 +27,7 @@ import Link from "next/link";
 import { useMultipleToggles } from "@/hooks";
 import { toast } from "@/components/ui/use-toast";
 import { EmployeeContext } from "@/context/employees";
-import { AssignModal } from "./modals";
+import { AddEmployeeModal, AssignModal } from "./modals";
 import { Employee } from "@/constants/types";
 
 interface CellActionProps {
@@ -36,16 +36,7 @@ interface CellActionProps {
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 	const deleteEmployee = useContext(EmployeeContext).deleteEmployee;
-	const { toggleState, activeState } = useMultipleToggles([
-		"delete",
-		"archive",
-		"attach",
-		"stage",
-		"assign",
-		"rejection",
-		"reference",
-		"logs",
-	]);
+	const { toggleState, activeState } = useMultipleToggles(["delete", "assign"]);
 
 	const handleDelete = () => {
 		deleteEmployee(data.id);

@@ -22,6 +22,10 @@ export const columns: ColumnDef<Employee>[] = [
 		accessorKey: "name",
 	},
 	{
+		header: "Role",
+		accessorKey: "role",
+	},
+	{
 		accessorKey: "supervisor.name",
 		header: "Supervisor",
 		cell: ({ row }) =>
@@ -29,13 +33,8 @@ export const columns: ColumnDef<Employee>[] = [
 	},
 	{
 		accessorKey: "createdAt",
-		header: "Application Date",
+		header: "Hire Date",
 		cell: ({ row }) => new Date(row.original.createdAt).toLocaleDateString(),
-	},
-	{
-		accessorKey: "updatedAt",
-		header: "Last Updated",
-		cell: ({ row }) => new Date(row.original.updatedAt).toLocaleDateString(),
 	},
 	{
 		id: "actions",

@@ -36,7 +36,7 @@ interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
 	pageNo?: number;
-	total?: number;
+	total: number;
 	pageSizeOptions?: number[];
 	pageCount?: number;
 	searchParams?: {
@@ -49,7 +49,6 @@ export function DataTable<TData, TValue>({
 	columns,
 	data,
 	total,
-	pageCount,
 	pageSizeOptions = [10, 20, 30, 40, 50],
 	loading,
 }: DataTableProps<TData, TValue>) {
@@ -113,7 +112,7 @@ export function DataTable<TData, TValue>({
 		data,
 		columns,
 
-		pageCount: total ? Math.ceil(total / pageSize) : pageCount,
+		pageCount: Math.ceil(total / pageSize),
 		getCoreRowModel: getCoreRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
 		state: {

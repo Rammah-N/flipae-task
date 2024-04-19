@@ -8,8 +8,8 @@ export interface Employee {
 		id: number;
 		name: string;
 	} | null;
+	role: string;
 	createdAt: string;
-	updatedAt: string;
 }
 
 interface NavItemWithOptionalChildren {

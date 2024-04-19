@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -15,15 +15,20 @@ import { employees } from "@/constants/data";
 import Search from "@/components/search";
 import { Employee } from "@/constants/types";
 import { EmployeeContext } from "@/context/employees";
+import { AddEmployeeModal } from "@/components/employees-table/modals";
+import { toast } from "@/components/ui/use-toast";
 
 const Page = () => {
-	const savedEmployees = localStorage.getItem("employees")
-		? JSON.parse(localStorage.getItem("employees") as string)
-		: employees;
-	const [data, setData] = useState<Employee[]>(savedEmployees);
+	const [openAdd, setOpenAdd] = useState(false);
+
+	const [data, setData] = useState<Employee[]>(employees);
 
 	const handleSearch = (value: string) => {
 		if (value === "") {
+			const storedEmployees = localStorage.getItem("employees");
+			const savedEmployees = storedEmployees
+				? JSON.parse(storedEmployees)
+				: employees;
 			setData(savedEmployees);
 			return;
 		}
@@ -33,6 +38,7 @@ const Page = () => {
 		);
 		setData(filteredData);
 	};
+
 	const contextValue = {
 		employees: data,
 		setEmployees: setData,
@@ -43,6 +49,14 @@ const Page = () => {
 		},
 		searchEmployee: handleSearch,
 	};
+
+	useEffect(() => {
+		if (!localStorage.getItem("employees")) {
+			localStorage.setItem("employees", JSON.stringify(employees));
+		} else {
+			setData(JSON.parse(localStorage.getItem("employees") as string));
+		}
+	}, []);
 	return (
 		<EmployeeContext.Provider value={contextValue}>
 			<Breadcrumb>
@@ -62,7 +76,9 @@ const Page = () => {
 			</Breadcrumb>
 			<div className="flex justify-between items-center">
 				<h1 className="text-2xl font-medium py-5">Employees List</h1>
-				<Button className="flex items-center gap-2">
+				<Button
+					className="flex items-center gap-2"
+					onClick={() => setOpenAdd(true)}>
 					<UserPlus />
 					Add Employee
 				</Button>
@@ -74,11 +90,16 @@ const Page = () => {
 					onClick={() => {
 						setData(employees);
 						localStorage.setItem("employees", JSON.stringify(employees));
+						toast({
+							title: "Data Reset",
+							description: "Employee data has been reset",
+						});
 					}}>
 					Reset Data
 				</Button>
 			</div>
 			<EmployeeTable />
+			<AddEmployeeModal isOpen={openAdd} toggle={() => setOpenAdd(false)} />
 		</EmployeeContext.Provider>
 	);
 };
