@@ -20,45 +20,10 @@ import { toast } from "@/components/ui/use-toast";
 
 const Page = () => {
 	const [openAdd, setOpenAdd] = useState(false);
+	const { setEmployees } = React.useContext(EmployeeContext);
 
-	const [data, setData] = useState<Employee[]>(employees);
-
-	const handleSearch = (value: string) => {
-		if (value === "") {
-			const storedEmployees = localStorage.getItem("employees");
-			const savedEmployees = storedEmployees
-				? JSON.parse(storedEmployees)
-				: employees;
-			setData(savedEmployees);
-			return;
-		}
-
-		const filteredData = employees.filter((employee) =>
-			employee.name.toLowerCase().includes(value.toLowerCase())
-		);
-		setData(filteredData);
-	};
-
-	const contextValue = {
-		employees: data,
-		setEmployees: setData,
-		deleteEmployee: (id: number) => {
-			const newEmployees = data.filter((employee) => employee.id !== id);
-			setData(newEmployees);
-			localStorage.setItem("employees", JSON.stringify(newEmployees));
-		},
-		searchEmployee: handleSearch,
-	};
-
-	useEffect(() => {
-		if (!localStorage.getItem("employees")) {
-			localStorage.setItem("employees", JSON.stringify(employees));
-		} else {
-			setData(JSON.parse(localStorage.getItem("employees") as string));
-		}
-	}, []);
 	return (
-		<EmployeeContext.Provider value={contextValue}>
+		<div className="py-5">
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
@@ -88,7 +53,7 @@ const Page = () => {
 				<Button
 					variant={null}
 					onClick={() => {
-						setData(employees);
+						setEmployees(employees);
 						localStorage.setItem("employees", JSON.stringify(employees));
 						toast({
 							title: "Data Reset",
@@ -100,7 +65,7 @@ const Page = () => {
 			</div>
 			<EmployeeTable />
 			<AddEmployeeModal isOpen={openAdd} toggle={() => setOpenAdd(false)} />
-		</EmployeeContext.Provider>
+		</div>
 	);
 };
 

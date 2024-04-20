@@ -7,6 +7,7 @@ export const employees: Employee[] = [
 		supervisor: null,
 		role: "CEO",
 		createdAt: "2024-04-18T08:00:00.000Z",
+		isCeo: true,
 	},
 	{
 		id: 2,
@@ -16,6 +17,7 @@ export const employees: Employee[] = [
 			id: 1,
 			name: "John Doe",
 		},
+		supervising: [5],
 		createdAt: "2024-04-17T08:00:00.000Z",
 	},
 	{
@@ -26,6 +28,7 @@ export const employees: Employee[] = [
 			id: 1,
 			name: "John Doe",
 		},
+		supervising: [6],
 		createdAt: "2024-04-16T08:00:00.000Z",
 	},
 	{
@@ -33,23 +36,32 @@ export const employees: Employee[] = [
 		name: "Emma Brown",
 		role: "Director of Marketing",
 		supervisor: {
-			id: 3,
-			name: "Bob Johnson",
+			id: 1,
+			name: "John Doe",
 		},
+		supervising: [16, 17, 18, 19],
 		createdAt: "2024-04-15T08:00:00.000Z",
 	},
 	{
 		id: 5,
 		name: "Michael Lee",
 		role: "Engineering Manager",
-		supervisor: null,
+		supervisor: {
+			id: 2,
+			name: "Alice Smith",
+		},
+		supervising: [7, 14],
 		createdAt: "2024-04-14T08:00:00.000Z",
 	},
 	{
 		id: 6,
 		name: "Jennifer Garcia",
 		role: "Sales Manager",
-		supervisor: null,
+		supervisor: {
+			id: 3,
+			name: "Bob Johnson",
+		},
+		supervising: [9, 10, 11],
 		createdAt: "2024-04-13T08:00:00.000Z",
 	},
 	{
@@ -60,13 +72,14 @@ export const employees: Employee[] = [
 			id: 2,
 			name: "Alice Smith",
 		},
+		supervising: [8, 12],
 		createdAt: "2024-04-12T08:00:00.000Z",
 	},
 	{
 		id: 8,
 		name: "Sophia Rodriguez",
 		role: "Junior Engineer",
-		supervisor: null,
+		supervisor: { id: 7, name: "William Martinez" },
 		createdAt: "2024-04-11T08:00:00.000Z",
 	},
 	{
@@ -74,8 +87,8 @@ export const employees: Employee[] = [
 		name: "Matthew Wilson",
 		role: "Sales Associate",
 		supervisor: {
-			id: 5,
-			name: "Michael Lee",
+			id: 6,
+			name: "Jennifer Garcia",
 		},
 		createdAt: "2024-04-10T08:00:00.000Z",
 	},
@@ -84,8 +97,8 @@ export const employees: Employee[] = [
 		name: "Olivia Martinez",
 		role: "Sales Associate",
 		supervisor: {
-			id: 2,
-			name: "Alice Smith",
+			id: 6,
+			name: "Jennifer Garcia",
 		},
 		createdAt: "2024-04-09T08:00:00.000Z",
 	},
@@ -94,8 +107,8 @@ export const employees: Employee[] = [
 		name: "Ethan Thomas",
 		role: "Sales Associate",
 		supervisor: {
-			id: 3,
-			name: "Bob Johnson",
+			id: 6,
+			name: "Jennifer Garcia",
 		},
 		createdAt: "2024-04-08T08:00:00.000Z",
 	},
@@ -103,7 +116,10 @@ export const employees: Employee[] = [
 		id: 12,
 		name: "Ava White",
 		role: "Junior Engineer",
-		supervisor: null,
+		supervisor: {
+			id: 7,
+			name: "William Martinez",
+		},
 		createdAt: "2024-04-07T08:00:00.000Z",
 	},
 	{
@@ -111,8 +127,8 @@ export const employees: Employee[] = [
 		name: "James Harris",
 		role: "Junior Engineer",
 		supervisor: {
-			id: 7,
-			name: "William Martinez",
+			id: 14,
+			name: "Charlotte King",
 		},
 		createdAt: "2024-04-06T08:00:00.000Z",
 	},
@@ -124,13 +140,17 @@ export const employees: Employee[] = [
 			id: 5,
 			name: "Michael Lee",
 		},
+		supervising: [13, 15],
 		createdAt: "2024-04-05T08:00:00.000Z",
 	},
 	{
 		id: 15,
 		name: "Logan Taylor",
 		role: "Junior Engineer",
-		supervisor: null,
+		supervisor: {
+			id: 14,
+			name: "Charlotte King",
+		},
 		createdAt: "2024-04-04T08:00:00.000Z",
 	},
 	{
@@ -148,8 +168,8 @@ export const employees: Employee[] = [
 		name: "Benjamin Nguyen",
 		role: "Marketing Associate",
 		supervisor: {
-			id: 1,
-			name: "John Doe",
+			id: 4,
+			name: "Emma Brown",
 		},
 		createdAt: "2024-04-02T08:00:00.000Z",
 	},
@@ -158,8 +178,8 @@ export const employees: Employee[] = [
 		name: "Lily Brown",
 		role: "Marketing Associate",
 		supervisor: {
-			id: 2,
-			name: "Alice Smith",
+			id: 4,
+			name: "Emma Brown",
 		},
 		createdAt: "2024-04-01T08:00:00.000Z",
 	},
@@ -167,7 +187,7 @@ export const employees: Employee[] = [
 		id: 19,
 		name: "Jacob Patel",
 		role: "Marketing Associate",
-		supervisor: null,
+		supervisor: { id: 4, name: "Emma Brown" },
 		createdAt: "2024-03-31T08:00:00.000Z",
 	},
 ];

@@ -5,6 +5,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Sidebar from "@/components/layout/sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { ContextProvider } from "@/context/employees";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +22,10 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={cn(inter.className)}>
 				<Sidebar />
-				<ScrollArea className="h-full flex-1 ">
-					<main className="flex-1 py-5">{children}</main>
+				<ScrollArea className="h-screen w-full">
+					<ContextProvider>
+						<main className="flex-1">{children}</main>
+					</ContextProvider>
 				</ScrollArea>
 				<Toaster />
 			</body>

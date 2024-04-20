@@ -9,6 +9,8 @@ export interface Employee {
 		name: string;
 	} | null;
 	role: string;
+	isCeo?: boolean;
+	supervising?: number[];
 	createdAt: string;
 }
 
