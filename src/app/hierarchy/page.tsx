@@ -8,7 +8,6 @@ import {
 	BreadcrumbPage,
 	BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Tree, TreeNode } from "react-organizational-chart";
 import { EmployeeContext } from "@/context/employees";
 import {
 	Active,
@@ -30,33 +29,21 @@ import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import Item from "@/components/item";
 import SortableItem from "@/components/sortableItem";
-const Draggable = ({ employee }: { employee: Employee }) => {
-	const { attributes, listeners, setNodeRef, transform } = useDraggable({
-		id: employee?.id,
-		data: { employee },
-		attributes: { tabIndex: employee.id },
-	});
-	const style = transform
-		? {
-				transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-				border: "1px solid red-500",
-		  }
-		: undefined;
+import dynamic from "next/dynamic";
 
-	return (
-		<button
-			ref={setNodeRef}
-			style={style}
-			{...listeners}
-			{...attributes}
-			className="border-2 border-primary">
-			<div className=" py-2 px-1 flex flex-col gap-2 justify-center">
-				<span>{employee?.name}</span>
-				<span className="text-xs text-slate-500">{employee?.role}</span>
-			</div>
-		</button>
-	);
-};
+// These two components use document internally, so they need to be loaded dynamically with ssr disabled
+const Tree = dynamic(
+	() => import("react-organizational-chart").then((m) => m.Tree),
+	{
+		ssr: false,
+	}
+);
+const TreeNode = dynamic(
+	() => import("react-organizational-chart").then((m) => m.TreeNode),
+	{
+		ssr: false,
+	}
+);
 
 const StyledNode = ({ employee }: { employee: Employee }) => {
 	return (
@@ -95,7 +82,6 @@ const Page = () => {
 	const { employees, setEmployees } = useContext(EmployeeContext);
 	const sensors = useSensors(useSensor(MouseSensor));
 	const [activeId, setActiveId] = useState<number | null>(null);
-	const [disableZoom, setDisableZoom] = useState(false);
 	const handleDragStart = useCallback((event: DragStartEvent) => {
 		const id: number = event.active.id as number;
 		setActiveId(id);
