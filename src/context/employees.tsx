@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Employee } from "@/constants/types";
+import { employees } from "@/constants/data";
 export const EmployeeContext = React.createContext<{
 	employees: Employee[];
 	setEmployees: (data: Employee[]) => void;
@@ -18,7 +19,7 @@ export const ContextProvider = ({
 }: {
 	children: React.ReactNode;
 }) => {
-	const [data, setData] = React.useState<Employee[]>([]);
+	const [data, setData] = React.useState<Employee[]>(employees);
 	const handleSearch = (value: string) => {
 		if (value === "") {
 			const storedEmployees = localStorage.getItem("employees");
