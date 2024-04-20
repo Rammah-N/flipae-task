@@ -23,7 +23,9 @@ export const ContextProvider = ({
 	const handleSearch = (value: string) => {
 		if (value === "") {
 			const storedEmployees = localStorage.getItem("employees");
-			const savedEmployees = storedEmployees ? JSON.parse(storedEmployees) : [];
+			const savedEmployees = storedEmployees
+				? JSON.parse(storedEmployees)
+				: employees;
 			setData(savedEmployees);
 			return;
 		}
@@ -42,7 +44,8 @@ export const ContextProvider = ({
 
 	React.useEffect(() => {
 		if (!localStorage.getItem("employees")) {
-			localStorage.setItem("employees", JSON.stringify(data));
+			localStorage.setItem("employees", JSON.stringify(employees));
+			setData(employees);
 		} else {
 			setData(JSON.parse(localStorage.getItem("employees") as string));
 		}
