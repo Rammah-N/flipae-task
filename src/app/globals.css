@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
 	:root {
 		--background: 0 0% 100%;
@@ -72,9 +71,6 @@
 	}
 	body {
 		@apply bg-background text-foreground;
-		min-height: 100vh;
 		background-color: #f5f5f5;
-		display: flex;
-		gap: 50px;
 	}
 }

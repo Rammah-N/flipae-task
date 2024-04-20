@@ -21,12 +21,12 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={cn(inter.className)}>
-				<Sidebar />
-				<ScrollArea className="h-screen w-full">
+				<div className="flex gap-10 min-h-screen min-w-screen p-5 overflow-x-hidden">
+					<Sidebar />
 					<ContextProvider>
-						<main className="flex-1">{children}</main>
+						<main className="flex-1 max-w-full max-h-full">{children}</main>
 					</ContextProvider>
-				</ScrollArea>
+				</div>
 				<Toaster />
 			</body>
 		</html>

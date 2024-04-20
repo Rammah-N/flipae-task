@@ -125,7 +125,7 @@ export function DataTable<TData, TValue>({
 
 	return (
 		<>
-			<ScrollArea className="rounded-md border h-[calc(80vh-100px)] bg-white">
+			<ScrollArea className="overflow-x-auto w-full rounded-md border h-[calc(80vh-100px)] bg-white">
 				<Table className="relative bg-white">
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (

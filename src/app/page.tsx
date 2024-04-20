@@ -1,6 +1,6 @@
 export default function Home() {
 	return (
-		<main className="py-5">
+		<main>
 			<h1>Home</h1>
 		</main>
 	);

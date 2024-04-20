@@ -155,7 +155,7 @@ const Page = () => {
 			onDragStart={handleDragStart}
 			onDragEnd={handleDragEnd}
 			onDragCancel={handleDragCancel}>
-			<div className="min-h-screen py-5">
+			<div className="min-h-screen py-5 overflow-x-hidden">
 				<Breadcrumb>
 					<BreadcrumbList>
 						<BreadcrumbItem>
@@ -173,8 +173,11 @@ const Page = () => {
 				</Breadcrumb>
 				<h1 className="text-2xl font-medium mt-5 mb-1">Employees Hierarchy</h1>
 				<p className="text-gray-500">
-					Here you can view and edit the employee hierarchy (drag and drop items
-					to change supervisors)
+					Here you can view and edit the employee hierarchy
+				</p>
+				<p className="text-gray-500">Drag and drop to edit employees</p>
+				<p className="text-gray-500">
+					Zoom out and drag to view the whole hierarchy
 				</p>
 				<TransformWrapper
 					initialScale={0.8}

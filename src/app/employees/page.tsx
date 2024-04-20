@@ -17,13 +17,14 @@ import { Employee } from "@/constants/types";
 import { EmployeeContext } from "@/context/employees";
 import { AddEmployeeModal } from "@/components/employees-table/modals";
 import { toast } from "@/components/ui/use-toast";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Page = () => {
 	const [openAdd, setOpenAdd] = useState(false);
 	const { setEmployees } = React.useContext(EmployeeContext);
 
 	return (
-		<div className="py-5">
+		<div className="max-w-full overflow-x-hidden">
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
@@ -39,7 +40,7 @@ const Page = () => {
 					</BreadcrumbItem>
 				</BreadcrumbList>
 			</Breadcrumb>
-			<div className="flex justify-between items-center">
+			<div className="flex flex-col md:flex-row justify-between items-start mb-5 md:mb-0 md:items-center">
 				<h1 className="text-2xl font-medium py-5">Employees List</h1>
 				<Button
 					className="flex items-center gap-2"
@@ -48,7 +49,7 @@ const Page = () => {
 					Add Employee
 				</Button>
 			</div>
-			<div className="flex justify-between items-center">
+			<div className="flex justify-between flex-col items-start md:flex-row md:items-center">
 				<Suspense>
 					<Search />
 				</Suspense>

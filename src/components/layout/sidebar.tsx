@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
 	Accordion,
@@ -10,7 +11,8 @@ import { DropdownNavProps } from "@/constants/types";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Home, Users } from "lucide-react";
+import { Home, Menu, Users } from "lucide-react";
+import { Button } from "../ui/button";
 
 const NavItem = ({
 	children,
@@ -71,27 +73,64 @@ const DropdownNav: React.FC<DropdownNavProps> = ({
 	);
 };
 
+const MobileNav = () => {
+	const [open, setOpen] = React.useState(false);
+
+	return (
+		<div className="lg:hidden fixed top-5 right-10 z-[999]">
+			<Button onClick={() => setOpen((prev) => !prev)}>
+				<Menu className="w-5" />
+			</Button>
+			{open && (
+				<nav className="bg-white px-2 py-3 absolute top-10 right-0 rounded-md">
+					<ul className="flex flex-col gap-5">
+						<NavItem icon={<Home className="w-5" />} href="/">
+							Home
+						</NavItem>
+						<DropdownNav
+							item={{
+								title: "Employees",
+								items: [
+									{ title: "List", href: "/employees" },
+									{ title: "Hierarchy", href: "/hierarchy" },
+								],
+							}}
+							path="/"
+							value="Employees"
+							icon={<Users className="w-5" />}
+						/>
+					</ul>
+				</nav>
+			)}
+		</div>
+	);
+};
+
 const Sidebar = () => {
 	return (
-		<nav className="bg-white w-[200px] rounded-md px-5 py-5 min-h-full shadow-md my-5 ml-5">
-			<ul className="flex flex-col gap-5">
-				<NavItem icon={<Home className="w-5" />} href="/">
-					Home
-				</NavItem>
-				<DropdownNav
-					item={{
-						title: "Employees",
-						items: [
-							{ title: "List", href: "/employees" },
-							{ title: "Hierarchy", href: "/hierarchy" },
-						],
-					}}
-					path="/"
-					value="Employees"
-					icon={<Users className="w-5" />}
-				/>
-			</ul>
-		</nav>
+		<>
+			{/* Desktop Nav */}
+			<nav className="bg-white w-[200px] rounded-md px-5 py-5 h-calc(100vh-50) shadow-md hidden lg:block">
+				<ul className="flex flex-col gap-5">
+					<NavItem icon={<Home className="w-5" />} href="/">
+						Home
+					</NavItem>
+					<DropdownNav
+						item={{
+							title: "Employees",
+							items: [
+								{ title: "List", href: "/employees" },
+								{ title: "Hierarchy", href: "/hierarchy" },
+							],
+						}}
+						path="/"
+						value="Employees"
+						icon={<Users className="w-5" />}
+					/>
+				</ul>
+			</nav>
+			<MobileNav />
+		</>
 	);
 };
 
