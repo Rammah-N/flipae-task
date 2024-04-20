@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -49,7 +49,9 @@ const Page = () => {
 				</Button>
 			</div>
 			<div className="flex justify-between items-center">
-				<Search />
+				<Suspense>
+					<Search />
+				</Suspense>
 				<Button
 					variant={null}
 					onClick={() => {
@@ -63,7 +65,9 @@ const Page = () => {
 					Reset Data
 				</Button>
 			</div>
-			<EmployeeTable />
+			<Suspense fallback="loading...">
+				<EmployeeTable />
+			</Suspense>
 			<AddEmployeeModal isOpen={openAdd} toggle={() => setOpenAdd(false)} />
 		</div>
 	);

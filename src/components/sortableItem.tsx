@@ -13,7 +13,7 @@ const SortableItem: FC<ItemProps> = (props) => {
 		transition,
 	} = useSortable({ id: props.id });
 	const style = {
-		transform: CSS.Translate.toString(transform),
+		transform: CSS.Transform.toString(transform),
 		transition: transition || undefined,
 	};
 
