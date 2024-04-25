@@ -13,11 +13,9 @@ import { Button } from "@/components/ui/button";
 import { UserPlus } from "lucide-react";
 import { employees } from "@/constants/data";
 import Search from "@/components/search";
-import { Employee } from "@/constants/types";
 import { EmployeeContext } from "@/context/employees";
 import { AddEmployeeModal } from "@/components/employees-table/modals";
 import { toast } from "@/components/ui/use-toast";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Page = () => {
 	const [openAdd, setOpenAdd] = useState(false);

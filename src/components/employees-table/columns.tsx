@@ -1,16 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./actions";
-import { cn } from "@/lib/utils";
-import {
-	AlarmClock,
-	BookLock,
-	CheckSquare,
-	SearchCheck,
-	UserCheck,
-	XSquare,
-} from "lucide-react";
 import { Employee } from "@/constants/types";
-import { Checkbox } from "../ui/checkbox";
 
 export const columns: ColumnDef<Employee>[] = [
 	{

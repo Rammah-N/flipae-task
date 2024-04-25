@@ -8,26 +8,13 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-	Archive,
-	BadgeCheck,
-	BookPlus,
-	BookText,
-	BookUser,
-	MoreHorizontal,
-	MoveDiagonal,
-	Trash,
-	UserCheck,
-	UserPlus,
-	UserX,
-} from "lucide-react";
+import { MoreHorizontal, Trash, UserPlus } from "lucide-react";
 import { useContext, useState } from "react";
-import Link from "next/link";
 
 import { useMultipleToggles } from "@/hooks";
 import { toast } from "@/components/ui/use-toast";
 import { EmployeeContext } from "@/context/employees";
-import { AddEmployeeModal, AssignModal } from "./modals";
+import { AssignModal } from "./modals";
 import { Employee } from "@/constants/types";
 
 interface CellActionProps {

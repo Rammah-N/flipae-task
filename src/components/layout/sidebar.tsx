@@ -6,11 +6,9 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import { AccordionItemProps } from "@radix-ui/react-accordion";
 import { DropdownNavProps } from "@/constants/types";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Home, Menu, Users } from "lucide-react";
 import { Button } from "../ui/button";
 
